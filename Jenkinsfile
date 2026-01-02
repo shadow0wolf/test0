@@ -39,6 +39,16 @@ pipeline {
             }
         }
 
+        stage('TEST Env') {
+            steps {
+                sh '''
+                    echo "*************"
+                    echo $JWT_SECRET
+                    echo $JWT_EXPIRATION
+                    echo "*************"
+                    '''
+            }
+        }
 
         stage('Deploy JAR') {
             steps {
