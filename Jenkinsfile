@@ -9,9 +9,9 @@ pipeline {
 
     environment {
         APP_NAME = 'demo'
-        APP_PORT = '9999'
+        APP_PORT = '9090'
         JAR_PATH = 'target'
-        DEPLOY_DIR = '~/apps/'
+        DEPLOY_DIR = '/home/wolf'
     }
 
     stages {
@@ -45,7 +45,10 @@ pipeline {
 
                     echo "Starting application..."
                     nohup java -jar $DEPLOY_DIR/$APP_NAME.jar \
-                        > $DEPLOY_DIR/app.log 2>&1 &
+                       > $DEPLOY_DIR/app.log 2>&1 &
+
+                    sleep 5
+                    tail -n 50 $DEPLOY_DIR/app.log
                 '''
             }
         }
