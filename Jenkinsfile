@@ -56,8 +56,7 @@ pipeline {
         cp $JAR_PATH/*.jar $DEPLOY_DIR/$APP_NAME.jar
 
         echo "Starting application..."
-        setsid nohup java -jar $DEPLOY_DIR/$APP_NAME.jar \
-            > $DEPLOY_DIR/app.log 2>&1 &
+        systemctl restart demo
 
         sleep 5
         tail -n 100 $DEPLOY_DIR/app.log
