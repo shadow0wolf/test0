@@ -57,9 +57,10 @@ pipeline {
                     echo "Starting application..."
                     setsid nohup java -jar /home/wolf/demo.jar \
                        > $DEPLOY_DIR/app.log 2>&1 &
-
+                    disown
                     sleep 5
-                    tail -n 50 $DEPLOY_DIR/app.log
+                    tail -n 100 $DEPLOY_DIR/app.log
+
                 '''
             }
         }
