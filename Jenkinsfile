@@ -29,6 +29,17 @@ pipeline {
             }
         }
 
+        stage('Load Env') {
+            steps {
+                script {
+                    def envVars = readProperties file: '.env'
+                    env.JWT_SECRET = envVars.JWT_SECRET
+                    env.JWT_EXPIRATION = envVars.JWT_EXPIRATION
+                }
+            }
+        }
+
+
         stage('Deploy JAR') {
             steps {
                 sh '''
@@ -44,9 +55,6 @@ pipeline {
                     cp $JAR_PATH/*.jar $DEPLOY_DIR/$APP_NAME.jar
 
                     echo "Starting application..."
-                     set -a
-                     source .env
-                     set +a
                     nohup java -jar $DEPLOY_DIR/$APP_NAME.jar \
                        > $DEPLOY_DIR/app.log 2>&1 &
 
