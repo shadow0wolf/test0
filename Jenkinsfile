@@ -11,7 +11,7 @@ pipeline {
         APP_NAME = 'demo'
         APP_PORT = '9999'
         JAR_PATH = 'target'
-        DEPLOY_DIR = '/opt/apps'
+        DEPLOY_DIR = '~/apps/'
     }
 
     stages {
