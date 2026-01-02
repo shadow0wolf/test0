@@ -45,6 +45,8 @@ pipeline {
                     echo "*************"
                     echo $JWT_SECRET
                     echo $JWT_EXPIRATION
+                    whoami
+                    id
                     echo "*************"
                     '''
             }
