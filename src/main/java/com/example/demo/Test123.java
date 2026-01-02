@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.function.*;
 
 public class Test123 {
-    public static void main(String[] args){
+    public static void mainx(String[] args){
         String y = new String("hello world");
         Predicate<String> pred = (x)-> "hello world" == x;
         Function<String, String> funcx = (x)-> "hello world" + x;
