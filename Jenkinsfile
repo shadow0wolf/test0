@@ -59,7 +59,7 @@ pipeline {
         cp target/${APP_NAME}-*.jar $DEPLOY_DIR/$APP_NAME.jar
 
         echo "Starting application..."
-        sudo -n systemctl restart demo
+        sudo -n /usr/bin/systemctl restart demo
 
         sleep 5
         tail -n 100 $DEPLOY_DIR/app.log
