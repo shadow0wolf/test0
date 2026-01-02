@@ -43,23 +43,24 @@ pipeline {
         stage('Deploy JAR') {
             steps {
                 sh '''
-                    echo "Stopping existing application..."
+        echo "Stopping existing application..."
 
-                    PID=$(lsof -t -i:$APP_PORT || true)
-                    if [ -n "$PID" ]; then
-                        kill -9 $PID
-                    fi
+        PID=$(lsof -t -i:$APP_PORT || true)
+        if [ -n "$PID" ]; then
+            kill $PID
+            sleep 5
+        fi
 
-                    echo "Deploying new JAR..."
-                    mkdir -p $DEPLOY_DIR
-                    cp $JAR_PATH/*.jar $DEPLOY_DIR/$APP_NAME.jar
+        echo "Deploying new JAR..."
+        mkdir -p $DEPLOY_DIR
+        cp $JAR_PATH/*.jar $DEPLOY_DIR/$APP_NAME.jar
 
-                    echo "Starting application..."
-                    setsid nohup java -jar /home/wolf/demo.jar \
-                       > $DEPLOY_DIR/app.log 2>&1 &
-                    disown
-                    sleep 5
-                    tail -n 100 $DEPLOY_DIR/app.log
+        echo "Starting application..."
+        setsid nohup java -jar $DEPLOY_DIR/$APP_NAME.jar \
+            > $DEPLOY_DIR/app.log 2>&1 &
+
+        sleep 5
+        tail -n 100 $DEPLOY_DIR/app.log
 
                 '''
             }
