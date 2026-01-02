@@ -44,6 +44,9 @@ pipeline {
                     cp $JAR_PATH/*.jar $DEPLOY_DIR/$APP_NAME.jar
 
                     echo "Starting application..."
+                     set -a
+                     source .env
+                     set +a
                     nohup java -jar $DEPLOY_DIR/$APP_NAME.jar \
                        > $DEPLOY_DIR/app.log 2>&1 &
 
