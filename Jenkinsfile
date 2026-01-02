@@ -55,7 +55,7 @@ pipeline {
                     cp $JAR_PATH/*.jar $DEPLOY_DIR/$APP_NAME.jar
 
                     echo "Starting application..."
-                    nohup java -jar $DEPLOY_DIR/$APP_NAME.jar \
+                    setsid nohup java -jar /home/wolf/demo.jar \
                        > $DEPLOY_DIR/app.log 2>&1 &
 
                     sleep 5
